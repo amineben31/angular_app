@@ -7,9 +7,19 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class EmployeeServiceService {
-  private url = '/assets/data/employee.json';
-  constructor(private http: HttpClient) {}
+  private url = 'http://localhost:3000/employees';
+
+  constructor() {}
   getEmployee(): Observable<IEmployee[]> {
-    return this.http.get<IEmployee[]>(this.url);
+    // Utilisation d'une méthode alternative pour récupérer les données
+    return new Observable<IEmployee[]>((observer) => {
+      fetch(this.url)
+        .then((response) => response.json())
+        .then((data) => {
+          observer.next(data as IEmployee[]);
+          observer.complete();
+        })
+        .catch((error) => observer.error(error));
+    });
   }
 }
