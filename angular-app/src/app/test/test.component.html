@@ -1,0 +1,21 @@
+<p>hello world {{ parentData }}</p>
+<p>test {{ greatUser() }}!</p>
+<input type="text" value="{{ name }}" bind-disabled="false" />
+<h2 [ngClass]="messageClass">hello world</h2>
+<h2 [ngStyle]="style">hello world</h2>
+<input *ngIf="display; then then; else block" type="text" [(ngModel)]="name" />
+
+<ng-template #block>
+  <p>hello world</p>
+</ng-template>
+<ng-template #then>
+  <p>then hello world</p>
+</ng-template>
+<div *ngFor="let color of colors; index as i">
+  <p>{{ i }}{{ color }}</p>
+</div>
+{{ display }}
+{{ name }}
+<input type="text" #myInput />
+<button (click)="onClick(myInput.value)">button</button>
+<button (click)="onFire()">button</button>
